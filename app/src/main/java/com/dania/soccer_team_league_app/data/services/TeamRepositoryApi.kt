@@ -1,4 +1,4 @@
-package com.dania.soccer_team_league_app.data.repository
+package com.dania.soccer_team_league_app.data.services
 
 import com.dania.soccer_team_league_app.data.remote.model.TeamResponse
 import com.dania.soccer_team_league_app.domain.model.Team
