@@ -1,7 +1,10 @@
 package com.dania.soccer_team_league_app.domain.model
 
-data class Team(
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
+data class Team(
     val name: String,
     val stadium: String,
     val badge: String,
@@ -12,4 +15,4 @@ data class Team(
     val facebook: String?,
     val twitter: String?,
     val instagram: String?
-)
+) : Parcelable
