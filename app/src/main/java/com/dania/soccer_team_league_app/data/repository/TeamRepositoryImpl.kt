@@ -8,8 +8,10 @@ import com.dania.soccer_team_league_app.domain.repository.TeamRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.lang.Exception
+import javax.inject.Inject
 
-class TeamRepositoryImpl(private val remoteDataSource: TeamRemoteDataSource) : TeamRepository {
+class TeamRepositoryImpl @Inject constructor(private val remoteDataSource: TeamRemoteDataSource) :
+    TeamRepository {
     override suspend fun getTeam(): Result<Teams, Exception> = try {
         val teams = withContext(Dispatchers.IO) {
             remoteDataSource.teamRepositoryApi.getTeam().mapToDomain()
