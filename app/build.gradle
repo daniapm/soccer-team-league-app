@@ -28,10 +28,7 @@ android {
     }
 
     packagingOptions {
-        exclude 'META-INF/LICENSE'
-        exclude 'META-INF/*.properties'
-        exclude 'META-INF/AL2.0'
-        exclude 'META-INF/LGPL2.1'
+        exclude 'META-INF/proguard/androidx-annotations.pro'
     }
 
     compileOptions {
@@ -64,15 +61,11 @@ dependencies {
     // Retrofit with Moshi Converter
     implementation "com.squareup.retrofit2:converter-scalars:2.9.0"
     implementation 'com.google.code.gson:gson:2.8.8'
-    implementation "io.coil-kt:coil:1.1.1"
     implementation 'com.google.dagger:hilt-android:2.37'
-    implementation 'com.google.dagger:hilt-compiler:2.40.5'
     kapt 'com.google.dagger:hilt-compiler:2.40.5'
     implementation 'androidx.fragment:fragment-ktx:1.4.0'
-    implementation 'android.arch.work:work-runtime:1.0.1'
 }
 
 kapt {
     correctErrorTypes = true
 }
-
