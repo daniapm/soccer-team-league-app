@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.dania.soccer_team_league_app.commons.Result
 import com.dania.soccer_team_league_app.domain.usecase.GetTeamUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -23,7 +24,9 @@ class TeamViewModel @Inject constructor(
             eventMutableLiveData.value = TeamEvent.ShowLoading
             when (val teams = getTeamUseCase.invoke()) {
                 is Result.Success -> {
-                    eventMutableLiveData.value = TeamEvent.SetTeams(teams.value.teams)
+                    teams.value.collect { list ->
+                        eventMutableLiveData.value = TeamEvent.SetTeams(list)
+                    }
                 }
                 is Result.Error -> eventMutableLiveData.value = TeamEvent.ShowError
             }
