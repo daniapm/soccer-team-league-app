@@ -3,6 +3,7 @@ package com.dania.soccer_team_league_app.viewmodel
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.dania.soccer_team_league_app.commons.Result
 import com.dania.soccer_team_league_app.commons.getOrAwaitValue
+import com.dania.soccer_team_league_app.domain.model.Team
 import com.dania.soccer_team_league_app.domain.usecase.GetTeamUseCase
 import com.dania.soccer_team_league_app.presentation.viewmodel.TeamEvent
 import com.dania.soccer_team_league_app.presentation.viewmodel.TeamViewModel
@@ -12,11 +13,11 @@ import io.mockk.coEvery
 import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
 import org.junit.*
-import java.lang.Exception
 
 @ExperimentalCoroutinesApi
 class TeamViewModelTest {
@@ -42,7 +43,7 @@ class TeamViewModelTest {
     fun `when use case is result success`() {
         coEvery {
             getTeamUseCase.invoke()
-        } returns Result.Success(teams)
+        } returns teams as Result<Flow<List<Team>>, Exception>
 
         viewModel.getTeam()
 
