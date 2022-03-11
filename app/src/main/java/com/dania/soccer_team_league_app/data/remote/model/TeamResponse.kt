@@ -1,6 +1,6 @@
 package com.dania.soccer_team_league_app.data.remote.model
 
-import com.dania.soccer_team_league_app.domain.model.Team
+import com.dania.soccer_team_league_app.data.db.TeamData
 import com.google.gson.annotations.SerializedName
 
 data class TeamResponse(
@@ -16,9 +16,10 @@ data class TeamResponse(
     @SerializedName("strInstagram") val instagram: String?,
 )
 
-fun TeamResponse.mapToDomain(): Team {
+fun TeamResponse.mapToData(): TeamData {
     return with(this) {
-        Team(
+        TeamData(
+            id = null,
             name = name.orEmpty(),
             stadium = stadium.orEmpty(),
             badge = badge.orEmpty(),
