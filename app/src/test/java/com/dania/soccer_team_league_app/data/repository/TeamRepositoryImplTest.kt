@@ -21,7 +21,7 @@ import org.mockito.Mockito.*
 import org.mockito.runners.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
-abstract class TeamRepositoryImplTest : TestCase() {
+class TeamRepositoryImplTest : TestCase() {
 
     lateinit var teamRepository: TeamRepository
 
@@ -67,26 +67,26 @@ abstract class TeamRepositoryImplTest : TestCase() {
     }
 
     @Test
-    suspend fun repositoryAsksForTeamToDao() {
+    suspend fun `repository Asks For TeamToDao`() {
         teamRepository.getTeam()
         //Verificamos que se llame al metodo siquiera una vez
         verify(teamDao, times(1)).getAllTeam()
     }
 
     @Test
-    suspend fun ifDaoReturnsTeamThenRepositoryReturnsSameTeam() {
+    suspend fun `if Dao Returns Team Then Repository Returns SameTeam`() {
         val team = teamRepository.getTeam()
         assertEquals(team, teamFromDao)
     }
 
     @Test(expected = IllegalStateException::class)
-    suspend fun whenDaoFailsRecoveringUserAnIllegalStateExceptionIsThrown() {
+    suspend fun `when Dao Fails Recovering Team An IllegalStateException Is Thrown`() {
         doAnswer { throw IllegalStateException() }.`when`(teamDao).getAllTeam()
         teamRepository.getTeam()
     }
 
     @Test
-    suspend fun whenDaoFailsRecoveringUserTheExceptionIsPropagated() {
+    suspend fun `when Dao Fails Recovering Team The Exception Is Propagated`() {
         val exception = IllegalStateException()
         doAnswer { throw exception }.`when`(teamDao).getAllTeam()
 
